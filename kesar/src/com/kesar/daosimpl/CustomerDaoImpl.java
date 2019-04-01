@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import com.kesar.daos.CustomerDao;
 import com.kesar.models.Customer;
+import com.kesar.models.Login;
 import com.kesar.utility.ConnectionProvider;
 
 public class CustomerDaoImpl implements CustomerDao {
@@ -54,51 +55,26 @@ public class CustomerDaoImpl implements CustomerDao {
 		return false;
 }
 	@Override
-	public Customer validateUser(String email, String pass) {
-		try {
-			Connection conn=ConnectionProvider.getConnection();
-			PreparedStatement ps=conn.prepareStatement("select * from Registration where email=? and password=?");
-			ps.setString(1,email);
-			ps.setString(2,pass);
-			
-			ResultSet rs=ps.executeQuery();
-			if(rs.next()){
-				String em=rs.getString(3);
-				String pa=rs.getString(8);
-				String name=rs.getString(1);
-				String mobileno=rs.getString(2);
-				Integer pin=rs.getInt(4);
-				String address=rs.getString(5);
-				String city=rs.getString(6);
-				String state=rs.getString(7);
-				
-				Customer obj=new Customer();
-				obj.setEmail(em);
-				obj.setPassword(pa);
-				obj.setName(name);
-				obj.setMobileNo(mobileno);
-				obj.setPinCode(pin);
-				obj.setAddress(address);
-				obj.setCity(city);
-				obj.setState(state);
-			
-				return obj;
-			}
-			else {
-				return null;
-			}
-			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
-		
-		return null;
-	}
-
-	@Override
 	public Customer getUser(String email) {
 		try {
 			Connection conn=ConnectionProvider.getConnection();
+			PreparedStatement ps=conn.prepareStatement("Select * from Registration where email=?");
+			ps.setString(1,email);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				Customer cust=new Customer();
+				cust.setName(rs.getString(1));
+				cust.setMobileNo(rs.getString(2));
+				cust.setEmail(rs.getString(3));
+				cust.setPinCode(rs.getInt(4));
+				cust.setAddress(rs.getString(5));
+				cust.setCity(rs.getString(6));
+				cust.setState(rs.getString(7));
+				
+				
+				
+				return cust;
+			}
 			
 			}
 			catch(Exception e){
@@ -112,23 +88,22 @@ public class CustomerDaoImpl implements CustomerDao {
 	public boolean updateUser(Customer custObj) {
 		try {
 			Connection conn=ConnectionProvider.getConnection();
-			PreparedStatement ps=conn.prepareStatement("Update Registration set password=?,yourname=?,mobileno=?,address=?,city=?,state=? where email=?");
+			PreparedStatement ps=conn.prepareStatement("Update Registration set cname=?,mobileno=?,pincode=?,address=?,city=?,state=? where email=?");
 
 			ps.setString(1, custObj.getName());
 	ps.setString(2, custObj.getMobileNo());
-	ps.setInt(4, custObj.getPinCode());
-	ps.setString(5, custObj.getAddress());
-	ps.setString(6, custObj.getCity());
-	ps.setString(7, custObj.getState());
+	ps.setInt(3, custObj.getPinCode());
+	ps.setString(4, custObj.getAddress());
+	ps.setString(5, custObj.getCity());
+	ps.setString(6, custObj.getState());
+	ps.setString(7,custObj.getEmail());
 		
-			
 			int i=ps.executeUpdate();
 			if(i!=0){
+				
 				return true;
 			}
-			else {
-				return false;
-			}
+			
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -137,15 +112,38 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public boolean changePassword(String email, String newPassword) {
+	public boolean changePassword(String email, String oldpassword,String newpassword) {
 		try {
 				Connection conn=ConnectionProvider.getConnection();
+				PreparedStatement ps=conn.prepareStatement("select * from Login where loginId=?");
+				ps.setString(1,email);
+				ResultSet rs=ps.executeQuery();
+				if(rs.next()) {
+					String s2=rs.getString(2);
+					if(s2.equals(oldpassword)){
+					PreparedStatement ps1=conn.prepareStatement("update Login set password=? where loginId=?");
+					ps1.setString(1,newpassword);
+					ps1.setString(2,email);
+					int i=ps1.executeUpdate();
+					if(i!=0){
+					return true;
+					}
+					else 
+						return false;
+					}
+					else{
+						return false;
+					}
+					}
+				
+					
+			
 				}
 				catch(Exception e){
 					e.printStackTrace();
 				}
-			
 		return false;
 	}
+	
 
 }

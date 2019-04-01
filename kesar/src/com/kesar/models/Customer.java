@@ -1,13 +1,13 @@
 package com.kesar.models;
 
 public class Customer {
-	private String Name;
-	private String MobileNo;
-	private String Email;
-	private String Address;
-	private String City;
-	private String State;
-	private String Password;
+	private String name;
+	private String mobileNo;
+	private String email;
+	private String address;
+	private String city;
+	private String state;
+	private String password;
 	private int pinCode;
 	
 	
@@ -18,46 +18,46 @@ public class Customer {
 		this.pinCode = pinCode;
 	}
 	public String getName() {
-		return Name;
+		return name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 	public String getMobileNo() {
-		return MobileNo;
+		return mobileNo;
 	}
 	public void setMobileNo(String mobileNo) {
-		MobileNo = mobileNo;
+		this.mobileNo = mobileNo;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 	public String getCity() {
-		return City;
+		return city;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
 	public String getState() {
-		return State;
+		return state;
 	}
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
 	

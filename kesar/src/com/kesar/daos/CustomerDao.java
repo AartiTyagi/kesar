@@ -5,7 +5,6 @@ public interface CustomerDao {
 	public boolean registerUser(Customer customerObj);
 	public Customer getUser(String email);
 	public boolean updateUser(Customer custObj);
-	public boolean changePassword(String email,String newPassword);
-	public Customer validateUser(String email, String pass);
+	public boolean changePassword(String email,String oldpassword,String newPassword);
 
 }

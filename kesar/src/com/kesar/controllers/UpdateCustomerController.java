@@ -24,35 +24,35 @@ public class UpdateCustomerController extends HttpServlet {
     	PrintWriter out=response.getWriter();
     	
     	String s1=request.getParameter("yourname");
-    	String s2=request.getParameter("email");
-    	String s3=request.getParameter("password");
+    	String s2=request.getParameter("mobileno");
+    	String s3=request.getParameter("email");
     	String s4=request.getParameter("pincode");
     	String s5=request.getParameter("address");
     	String s6=request.getParameter("city");
     	String s7=request.getParameter("state");
-    	String s8=request.getParameter("pincode");
+   
     	
     	
     	
     	Customer userObj=new Customer();
-    	userObj.setEmail(s2);
-    	userObj.setMobileNo(s3);
-    	userObj.setName(s1);                                 
-    	userObj.setPinCode(Integer.parseInt(s4));
+    	userObj.setName(s1);
+    	userObj.setEmail(s3);
+    	userObj.setMobileNo(s2);
+        userObj.setPinCode(Integer.parseInt(s4));
     	userObj.setAddress(s5);
     	userObj.setCity(s6);
     	userObj.setState(s7);
-    	userObj.setPassword(s8);
     	CustomerDao dao=new CustomerDaoImpl();
     	boolean r=dao.updateUser(userObj);
-    	if(r){
+    	if(r==true){
     		HttpSession session=request.getSession();
-    		request.setAttribute("errorMsg", "User updated Succesfully");
+    		request.setAttribute("errorMsg", "success");
     		session.setAttribute("user",userObj);
     		RequestDispatcher rd=request.getRequestDispatcher("ViewProfile.jsp");
     		rd.forward(request, response);
     	}
     	else {
+    		request.setAttribute("errorMsg", "fail");
     		RequestDispatcher rd=request.getRequestDispatcher("UpdateProfile.jsp");
     		rd.forward(request, response);
     				

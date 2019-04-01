@@ -19,7 +19,7 @@
       <a class="navbar-brand" href="#">Kesar Automobiles</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="CustomerHome.jsp">Home</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Shop By Category<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#">Page 1-1</a></li>
@@ -31,11 +31,11 @@
       <li><a href="#">Contact Us</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome : ${sessionScope.user.Name}<span class="caret"></span></a>
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Welcome : ${sessionScope.user.name}<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="ViewProfile.jsp">View Profile</a></li>
           <li><a href="UpdateProfile.jsp">Update Profile</a></li>
-          <li><a href="#">Change Password</a></li>
+          <li><a href="ChangePassword.jsp">Change Password</a></li>
           <li><a href="LogOut.jsp"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
         </ul>
       </li>

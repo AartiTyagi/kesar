@@ -1,8 +1,6 @@
-package com.kesar.controllers;
+	package com.kesar.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +12,14 @@ import com.kesar.daos.CustomerDao;
 import com.kesar.daosimpl.CustomerDaoImpl;
 import com.kesar.models.Customer;
 
+
 @WebServlet("/signup")
 public class CustomerRegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.setContentType("text/html");  
-        PrintWriter out = response.getWriter(); 
+   	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   		response.setContentType("text/html");  
+    
         
         
         String s1 = request.getParameter("yourname"); 
@@ -67,6 +65,6 @@ public class CustomerRegistrationController extends HttpServlet {
 			rd.forward(request, response);
 	
 	}
-}
-}
+	}
 
+}
